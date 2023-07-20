@@ -4,16 +4,24 @@
     align-items: center;
 }
 
+.tituloIM {
+    font-size: 40px;
+    color: black;
+    font-weight: 900;
+}
+
 
 .divTxt {
     width: 30vw;
-    height: 60vh;
+    height: 50vh;
 
-    border: solid 1px black;
+    border: solid 1px rgb(68, 68, 68);
     overflow-y: scroll;
 
     background-color: white;
     
     font-size: 20px;
     word-wrap: break-word;
-}
+
+    margin-top: 5vh;
+}   
