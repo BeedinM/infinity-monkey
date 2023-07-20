@@ -18,10 +18,14 @@
     border: solid 1px rgb(68, 68, 68);
     overflow-y: scroll;
 
-    background-color: white;
+    background-color: #D9D9D9;
     
     font-size: 20px;
     word-wrap: break-word;
 
     margin-top: 5vh;
-}   
+}
+
+/* .divGif {
+    filter: invert(100%);
+} */
