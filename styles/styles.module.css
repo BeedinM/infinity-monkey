@@ -10,7 +10,10 @@
     height: 60vh;
 
     border: solid 1px black;
-    overflow: scroll;
-    word-wrap: break-word;
+    overflow-y: scroll;
+
+    background-color: white;
     
+    font-size: 20px;
+    word-wrap: break-word;
 }
