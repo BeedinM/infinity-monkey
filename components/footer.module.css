@@ -1,0 +1,28 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.divFooter {
+    display: flex;
+    justify-content: center;
+
+    width: 80vw;
+    height: 7vh;
+
+    color: aliceblue;
+    font-size: 18px;
+
+    margin: 5px;
+    margin-top: 25px;
+
+    border-top: solid 2px rgb(255, 255, 255);
+}
+
+.divFooter a {
+    color: aliceblue;
+    text-decoration: none;
+}
