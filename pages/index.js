@@ -5,6 +5,14 @@ import styles from '../styles/styles.module.css';
 
 const letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'w', 'y', 'z'];
 
+async function checkWordInDictionary(word) {
+  const response = await fetch(`https://api.dicionario-aberto.net/word/${word}`);
+  const data = await response.json();
+
+  // Verificar se o objeto de resposta contém dados (propriedades)
+  return Object.keys(data).length > 0;
+}
+
 export default function Inicio() {
   const [textoMacaco, setTextoMacaco] = useState([]);
   const [selectedText, setSelectedText] = useState('');
@@ -14,17 +22,30 @@ export default function Inicio() {
   const handleSelection = () => {
     const text = window.getSelection().toString();
     setSelectedText(text);
-    setShowModal(true);
   };
 
-  const handleConfirm = () => {
-    setPalavras((prevPalavras) => [...prevPalavras, selectedText]);
+  const handleConfirm = async () => {
+    const wordExists = await checkWordInDictionary(selectedText);
+    if (wordExists) {
+      setPalavras((prevPalavras) => [...prevPalavras, selectedText]);
+    } else {
+      alert('Palavra não encontrada no dicionário.');
+    }
     setShowModal(false);
   };
 
   const handleCancel = () => {
     setShowModal(false);
   };
+
+  useEffect(() => {
+    // Mostrar o modal somente se houver texto selecionado
+    if (selectedText) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  }, [selectedText]);
 
   //script pegar e armazenar uma letra aleatória a x tempo
   useEffect(() => {
@@ -42,7 +63,7 @@ export default function Inicio() {
 
   return (
     <div className={styles.container}>
-      {/* Renderizar o componente de modal quando showmodal for true */}
+      {/* Renderizar o componente de modal somente quando houver texto selecionado */}
       {showModal && (
         <SelectModal
           selectedText={selectedText}
