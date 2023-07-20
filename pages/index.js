@@ -28,20 +28,12 @@ export default function Inicio() {
     };
   }, []);
 
-  //script pegar e armazenar seleção de texto que usuário faz
-  useEffect(() => {
-    document.addEventListener('mouseup', handleSelection);
-    return () => {
-      document.removeEventListener('mouseup', handleSelection);
-    };
-  }, []);
-
   return (
     <div className={styles.container}>
       <div className={styles.divGif}>
 
       </div>
-      <div className={styles.divTxt}>
+      <div className={styles.divTxt} onMouseUp={handleSelection}>
         {textoMacaco.map((letra, index) => (
           <span key={index}>{letra}</span>
         ))}
