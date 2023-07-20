@@ -54,7 +54,7 @@ export default function Inicio() {
         ...prevTextoMacaco,
         letras[Math.floor(Math.random() * letras.length)],
       ]);
-    }, 500);
+    }, 250);
 
     return () => {
       clearInterval(interval);
@@ -71,7 +71,9 @@ export default function Inicio() {
           onConfirm={handleConfirm}
         />
       )}
-      <div className={styles.divGif}></div>
+      <div className={styles.divGif}>
+        <img src='/images/monkey-typing.gif'></img>
+      </div>
       <div className={styles.divTxt} onMouseUp={handleSelection}>
         {textoMacaco.map((letra, index) => (
           <span key={index}>{letra}</span>
