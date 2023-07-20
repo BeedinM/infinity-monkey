@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import SelectModal from '@/components/selectModal';
 
 import styles from '../styles/styles.module.css';
 
@@ -6,12 +7,23 @@ const letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 
 export default function Inicio() {
   const [textoMacaco, setTextoMacaco] = useState([]);
+  const [selectedText, setSelectedText] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [palavras, setPalavras] = useState([]);
 
   const handleSelection = () => {
-    const selectedText = window.getSelection().toString();
-    console.log('Texto selecionado:', selectedText);
-    // Aqui eu posso fazer o que quiser com o texto selecionado,
-    // como enviar para um estado do componente, exibir em um modal, etc.
+    const text = window.getSelection().toString();
+    setSelectedText(text);
+    setShowModal(true);
+  };
+
+  const handleConfirm = () => {
+    setPalavras((prevPalavras) => [...prevPalavras, selectedText]);
+    setShowModal(false);
+  };
+
+  const handleCancel = () => {
+    setShowModal(false);
   };
 
   //script pegar e armazenar uma letra aleatória a x tempo
@@ -21,7 +33,7 @@ export default function Inicio() {
         ...prevTextoMacaco,
         letras[Math.floor(Math.random() * letras.length)],
       ]);
-    }, 100);
+    }, 500);
 
     return () => {
       clearInterval(interval);
@@ -30,12 +42,23 @@ export default function Inicio() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.divGif}>
-
-      </div>
+      {/* Renderizar o componente de modal quando showmodal for true */}
+      {showModal && (
+        <SelectModal
+          selectedText={selectedText}
+          onClose={handleCancel}
+          onConfirm={handleConfirm}
+        />
+      )}
+      <div className={styles.divGif}></div>
       <div className={styles.divTxt} onMouseUp={handleSelection}>
         {textoMacaco.map((letra, index) => (
           <span key={index}>{letra}</span>
+        ))}
+      </div>
+      <div>
+        {palavras.map((palavra, index) => (
+          <p key={index}>{index} {palavra}</p>
         ))}
       </div>
     </div>
