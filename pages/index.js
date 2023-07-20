@@ -71,6 +71,7 @@ export default function Inicio() {
           onConfirm={handleConfirm}
         />
       )}
+      <div className={styles.tituloIM}>Infinity Monkey</div>
       <div className={styles.divGif}>
         <img src='/images/monkey-typing.gif'></img>
       </div>
