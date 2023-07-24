@@ -1,22 +1,25 @@
 import prisma from '../lib/prisma.js';
-import { useEffect } from 'react';
 
-
-
-async function getUser() {
+export async function getStaticProps() {
     const allUsers = await prisma.usuario.findMany();
-    console.log(allUsers); 
-}
-
-export default function Testes() {
-    useEffect(() => {
-      getUser();
-    }, []);
+    console.log(allUsers);
   
-    return (
-      <main>
-        <h1>Testando ORM</h1>
-        <button onClick={getUser}>APERTA AQUI</button>
-      </main>
-    )
+    return {
+      props: {
+        users: allUsers,
+      },
+    };
   }
+
+export default function Usuarios({ users }) {
+    return (
+        <main>
+        <h1>Lista de Usuários</h1>
+        <ul>
+            {users.map((user) => (
+            <li key={user.id}>{user.nomeUsuario}</li>
+            ))}
+        </ul>
+        </main>
+    );
+}
