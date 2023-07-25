@@ -14,7 +14,7 @@ datasource db {
 
 model Usuario {
   id                 Int                @id @default(autoincrement())
-  nomeUsuario        String
+  nomeUsuario        String             @unique
   email              String             @unique
   senha              String
   dataCadastro       DateTime

@@ -13,7 +13,6 @@ export default async function handler(req, res) {
         nomeUsuario,
         email,
         senha,
-        // Outros campos do usuário, se houver
       },
     });
 
