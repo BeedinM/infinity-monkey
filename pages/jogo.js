@@ -6,6 +6,7 @@ import SelectModal from '@/components/selectModal';
 
 import styles from '../styles/styles.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const letras = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'x', 'w', 'y', 'z'];
 
@@ -89,7 +90,7 @@ export default function Jogo() {
       )}
       <div className={styles.tituloIM}>Infinity Monkey</div>
       <div className={styles.divGif}>
-        <img src='/images/monkey-typing.gif'></img>
+        <Image src='/images/monkey-typing.gif' width={320} height={240} alt='macaco' />
       </div>
       <div className={styles.divTxt} onMouseUp={handleSelection}>
         {textoMacaco.map((letra, index) => (
