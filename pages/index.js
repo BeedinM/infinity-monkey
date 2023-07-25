@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router';
-import { signOut, useSession } from 'next-auth/react';
-import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
+import styles from '../styles/home.module.css';
 
-export default function Inicio() {
+import Inicio from '../components/inicio.js';
+
+export default function Index() {
     const router = useRouter();
-    /* const isActive = (pathname) => {
-        return router.pathname === pathname;
-    }; */
     const { data: session} = useSession();
 
     useEffect(() => {
@@ -18,8 +17,8 @@ export default function Inicio() {
     }, [session, router]);
     
     return (
-        <div>
-            <Link href='/api/auth/signin'>FAZER LOGIN</Link>
+        <div className={styles.inicioDiv}>
+            <Inicio />
         </div>
     );
 };

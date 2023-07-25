@@ -1,0 +1,23 @@
+.telaInicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 500px;
+    height: 500px;
+}
+
+.tituloInicio {
+    color: white;
+    font-size: 18px;
+    font-weight: 900;
+
+    height: 30%;
+}
+
+.txtLogin {
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+}
