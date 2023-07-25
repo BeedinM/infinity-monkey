@@ -40,6 +40,4 @@ next-env.d.ts
 .env
 
 # modelos
-/pages/exem.js
-
-testes.js
+/arquivos de teste
