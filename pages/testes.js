@@ -1,4 +1,4 @@
-import prisma from '../lib/prisma.js';
+/* import prisma from '../lib/prisma.js';
 
 export async function getStaticProps() {
     const allUsers = await prisma.usuario.findMany();
@@ -22,4 +22,4 @@ export default function Usuarios({ users }) {
         </ul>
         </main>
     );
-}
+} */
