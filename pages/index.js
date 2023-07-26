@@ -1,20 +1,33 @@
-import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
 
 import styles from '../styles/home.module.css';
 
+import Loading from '../components/loading.js';
 import Inicio from '../components/inicio.js';
+import LeftPerf from '@/components/leftPerf';
+import OJogo from '@/components/jogo';
+import RightRank from '@/components/rightRank';
 
 export default function Index() {
-    const router = useRouter();
-    const { data: session} = useSession();
+    const { data: session, status} = useSession();
 
-    useEffect(() => {
-        if (session) {
-            router.push('/jogo');
-        }
-    }, [session, router]);
+    if(status === 'loading') {
+        return (
+            <div className={styles.inicioDiv}>
+                <Loading />
+            </div>
+        )
+    }
+
+    if (session) {
+        return (
+            <div className={styles.divLogado}>
+                <LeftPerf nomeUser={session.user.name} imgUser={session.user.image}/>
+                <OJogo />
+                <RightRank />
+            </div>
+        );
+    }
     
     return (
         <div className={styles.inicioDiv}>
