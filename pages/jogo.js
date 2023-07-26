@@ -88,6 +88,7 @@ export default function Jogo() {
           onConfirm={handleConfirm}
         />
       )}
+      <div>Bem vindo, {session.user.name}</div>
       <div className={styles.tituloIM}>Infinity Monkey</div>
       <div className={styles.divGif}>
         <Image src='/images/monkey-typing.gif' width={320} height={240} alt='macaco' />
