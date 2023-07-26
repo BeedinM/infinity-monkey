@@ -1,0 +1,36 @@
+.rankContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+
+    background-color: rgb(56, 56, 56);
+}
+
+.tituloRank {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.rankPts {
+    width: 80%;
+    height: 30%;
+
+    border: solid 1px black;
+
+    background-color: rgb(138, 138, 138);
+}
+
+.rankPalavra {
+    width: 80%;
+    height: 30%;
+
+    border: solid 1px black;
+
+    background-color: rgb(138, 138, 138);
+}

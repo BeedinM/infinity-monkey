@@ -7,7 +7,7 @@
     width: 500px;
     height: 500px;
 
-    background-color: rgb(56, 56, 56);
+    background-image: linear-gradient(to bottom right, rgb(56, 56, 56), rgb(129, 129, 129));
     border: solid 1px grey;
     border-radius: 20px;
 

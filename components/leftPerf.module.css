@@ -1,0 +1,55 @@
+.perfContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+
+    background-image: linear-gradient(to bottom right, rgb(56, 56, 56), rgb(94, 92, 92));
+
+}
+
+.imgPerfil  {
+    width: 125px;
+    height: 125px;
+
+    border: solid 1px grey;
+    border-radius: 125px;
+    box-shadow: 0px 1px 10px 2px rgb(94, 94, 94);
+
+    overflow: hidden;
+}
+
+    .imgPerfil img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+.divNome {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+.divPts {
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+}
+
+.divPalavras {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 80%;
+    height: 30%;
+
+    border: solid 1px black;
+
+    background-color: rgb(138, 138, 138);
+}
