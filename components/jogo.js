@@ -32,13 +32,14 @@ export default function OJogo() {
         const wordExists = await checkWordInDictionary(selectedText);
         if (wordExists) {
             // Chame a API para salvar a palavra encontrada
+            const userEmail = session.user.email;
             console.log(session.user);
             const response = await fetch('/api/jogo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userId: session.user.id, selectedText }),
+            body: JSON.stringify({ userEmail, selectedText }),
             });
 
             const data = await response.json();

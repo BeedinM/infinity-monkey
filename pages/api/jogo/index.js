@@ -1,16 +1,28 @@
+import { getSession } from 'next-auth/react';
 import prisma from '@/lib/prisma';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { userId, selectedText } = req.body;
+    const { userEmail, selectedText } = req.body;
 
     try {
+        const session = await getSession({ req });
+        if (!session) {
+          return res.status(401).json({ error: 'Usuário não autenticado.' });
+        }
+
+        // Verifique se o email do usuário autenticado corresponde ao email enviado pelo cliente
+        if (session.user.email !== userEmail) {
+          return res.status(403).json({ error: 'Acesso negado.' });
+        }
         const foundWord = await prisma.foundWord.findFirst({
           where: {
             userId,
             word: selectedText,
           },
         });
+
+        const userId = session.user.id;
 
         if (foundWord) {
           return res.status(400).json({ error: 'Palavra já encontrada.' });
