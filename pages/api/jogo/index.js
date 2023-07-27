@@ -7,6 +7,7 @@ export default async function handler(req, res) {
 
     try {
         const session = await getSession({ req });
+        console.log(session.user);
         if (!session) {
           return res.status(401).json({ error: 'Usuário não autenticado.' });
         }
@@ -15,14 +16,15 @@ export default async function handler(req, res) {
         if (session.user.email !== userEmail) {
           return res.status(403).json({ error: 'Acesso negado.' });
         }
+
+        const userId = session.user.id; 
+
         const foundWord = await prisma.foundWord.findFirst({
           where: {
             userId,
             word: selectedText,
           },
         });
-
-        const userId = session.user.id;
 
         if (foundWord) {
           return res.status(400).json({ error: 'Palavra já encontrada.' });
