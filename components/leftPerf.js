@@ -39,7 +39,7 @@ export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
                 <p>pontos:</p>
             </div>
 
-            <div onLoad={() => listaPalavras()} className={styles.divPalavras}>
+            <div onClick={() => listaPalavras()} className={styles.divPalavras}>
                 <p>Palavras encontradas</p>
                 <div>{listaDePalavras}</div>
             </div>
