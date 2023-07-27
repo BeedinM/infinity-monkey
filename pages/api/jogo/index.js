@@ -15,7 +15,6 @@ export default async function handler(req, res) {
     try {
       const wordExists = await checkWordInDictionary(selectedText);
       if (wordExists) {
-        // Verificar se a palavra já foi encontrada pelo usuário
         const foundWord = await prisma.foundWord.findFirst({
           where: {
             userId,
@@ -27,7 +26,6 @@ export default async function handler(req, res) {
           return res.status(400).json({ error: 'Palavra já encontrada.' });
         }
 
-        // Salvar a palavra e pontuação no banco de dados
         const score = selectedText.length;
         const newWord = await prisma.foundWord.create({
           data: {

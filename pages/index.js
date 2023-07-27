@@ -22,7 +22,7 @@ export default function Index() {
     if (session) {
         return (
             <div className={styles.divLogado}>
-                <LeftPerf nomeUser={session.user.name} imgUser={session.user.image}/>
+                <LeftPerf nomeUser={session.user.name} imgUser={session.user.image} />
                 <OJogo />
                 <RightRank />
             </div>
