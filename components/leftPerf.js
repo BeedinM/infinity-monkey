@@ -8,16 +8,24 @@ export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
 
     const listaPalavras = async () => {
         try {
-            const response = await fetch(`/api/palavras/?userEmail=${userEmail}`);
-            const data = await response.json();
+            const response = await fetch(`/api/palavras/?userEmail=${userEmail}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
     
+            const data = await response.json();
             if (response.ok) {
-                setListaDePalavras(data.foundWord);
+                // Assuming "data.foundWord" is an array of objects with the property "word"
+                const words = data.foundWord.map(item => item.word);
+                setListaDePalavras(words);
             } else {
                 alert(data.error);
             }
         } catch (error) {
-            console.error('Erro ao buscar palavras:', error);
+            console.error('Erro ao consultar palavras', error);
+            alert('Erro ao consultar palavras');
         }
     }
 
