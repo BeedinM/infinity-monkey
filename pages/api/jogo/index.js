@@ -1,4 +1,4 @@
-import { getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import prisma from '@/lib/prisma';
 
 export default async function handler(req, res) {
@@ -6,7 +6,8 @@ export default async function handler(req, res) {
     const { userEmail, selectedText } = req.body;
 
     // Obtém a sessão com base no email do usuário
-    const session = await getSession({ req });
+    const { data: session} = useSession();
+    console.log(session)
     if (!session) {
       return res.status(401).json({ error: 'Usuário não autenticado.' });
     }
