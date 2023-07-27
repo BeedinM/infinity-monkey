@@ -1,9 +1,27 @@
 import { signOut } from 'next-auth/react';
+import { useState } from 'react';
 
 import styles from './leftPerf.module.css';
 
 export default function LeftPerf({ nomeUser, imgUser}) {
-    console.log(nomeUser);
+    const [ listaDePalavras, setListaDePalavras ] = useState([]);
+
+    const listaPalavras = async () => {
+            const response = await fetch('/api/palavras/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userEmail: session.user.email }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+            setListaDePalavras(data);
+            } else {
+            alert(data.error);
+            }
+        }
 
     return (
         <div className={styles.perfContainer}>
@@ -19,8 +37,9 @@ export default function LeftPerf({ nomeUser, imgUser}) {
                 <p>pontos:</p>
             </div>
 
-            <div className={styles.divPalavras}>
+            <div onLoad={listaPalavras()} className={styles.divPalavras}>
                 <p>Palavras encontradas</p>
+                {listaDePalavras}
             </div>
 
             <button onClick={() => signOut()}>
