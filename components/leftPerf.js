@@ -1,10 +1,12 @@
 import { signOut } from 'next-auth/react';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 import styles from './leftPerf.module.css';
 
 export default function LeftPerf({ nomeUser, imgUser}) {
     const [ listaDePalavras, setListaDePalavras ] = useState([]);
+    const { data: session } = useSession();
 
     const listaPalavras = async () => {
             const response = await fetch('/api/palavras/', {
