@@ -33,7 +33,7 @@ export default function OJogo() {
         if (wordExists) {
             // Chame a API para salvar a palavra encontrada
             console.log(session.user);
-            const response = await fetch('/api/jogo', {
+            const response = await fetch('/api/jogo/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
