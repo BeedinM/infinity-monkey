@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 
 import styles from './leftPerf.module.css';
 
-export default function LeftPerf({ nomeUser, imgUser}) {
+export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
     const [ listaDePalavras, setListaDePalavras ] = useState([]);
     const { data: session } = useSession();
 
@@ -14,7 +14,7 @@ export default function LeftPerf({ nomeUser, imgUser}) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ userEmail: session.user.email }),
+            body: JSON.stringify({ userEmail: userEmail }),
             });
 
             const data = await response.json();
@@ -39,7 +39,7 @@ export default function LeftPerf({ nomeUser, imgUser}) {
                 <p>pontos:</p>
             </div>
 
-            <div onClick={listaPalavras()} className={styles.divPalavras}>
+            <div onLoad={() => listaPalavras()} className={styles.divPalavras}>
                 <p>Palavras encontradas</p>
                 <div>{listaDePalavras}</div>
             </div>

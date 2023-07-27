@@ -20,10 +20,8 @@ export default async function handler(req, res) {
               userId: user.id,
             },
           });
-    
-          if (foundWord) {
-            return foundWord;
-          }
+            return res.json({ foundWord })
+            
         } catch (error) {
           console.error('Erro ao encontrar palavras', error);
           return res.status(500).json({ error: 'Erro ao encontrar palavras' });
