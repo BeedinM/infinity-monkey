@@ -5,43 +5,47 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { userEmail, selectedText } = req.body;
 
+    // Obtém a sessão com base no email do usuário
+    const session = await getSession({ req });
+    if (!session) {
+      return res.status(401).json({ error: 'Usuário não autenticado.' });
+    }
+
+    // Encontre o usuário com base no email
+    const user = await prisma.user.findUnique({
+      where: { email: userEmail },
+    });
+
+    // Verifique se o usuário foi encontrado
+    if (!user) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
     try {
-        const session = await getSession({ req });
-        console.log(session.user);
-        if (!session) {
-          return res.status(401).json({ error: 'Usuário não autenticado.' });
-        }
+      const foundWord = await prisma.foundWord.findFirst({
+        where: {
+          userId: user.id,
+          word: selectedText,
+        },
+      });
 
-        // Verifique se o email do usuário autenticado corresponde ao email enviado pelo cliente
-        if (session.user.email !== userEmail) {
-          return res.status(403).json({ error: 'Acesso negado.' });
-        }
+      if (foundWord) {
+        return res.status(400).json({ error: 'Palavra já encontrada.' });
+      }
 
-        const userId = session.user.id; 
+      const score = selectedText.length;
 
-        const foundWord = await prisma.foundWord.findFirst({
-          where: {
-            userId,
-            word: selectedText,
-          },
-        });
+      // Salve a palavra encontrada associada ao usuário encontrado pelo email
+      const newWord = await prisma.foundWord.create({
+        data: {
+          word: selectedText,
+          score,
+          user: { connect: { id: user.id } }, // Use o id do usuário encontrado
+        },
+      });
 
-        if (foundWord) {
-          return res.status(400).json({ error: 'Palavra já encontrada.' });
-        }
-
-        const score = selectedText.length;
-        const newWord = await prisma.foundWord.create({
-          data: {
-            word: selectedText,
-            score,
-            user: { connect: { id: userId } },
-          },
-        });
-
-        return res.json({ message: 'Palavra salva com sucesso!', word: newWord });
-      } 
-    catch (error) {
+      return res.json({ message: 'Palavra salva com sucesso!', word: newWord });
+    } catch (error) {
       console.error('Erro ao salvar a palavra:', error);
       return res.status(500).json({ error: 'Erro ao salvar a palavra.' });
     }
