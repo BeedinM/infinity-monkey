@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {
-        const { userEmail } = req.body;
+        const { userEmail } = req.query;
     
         // Encontre o usuário com base no email
         const user = await prisma.user.findUnique({
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
             },
           });
             return res.json({ foundWord })
-            
+
         } catch (error) {
           console.error('Erro ao encontrar palavras', error);
           return res.status(500).json({ error: 'Erro ao encontrar palavras' });
