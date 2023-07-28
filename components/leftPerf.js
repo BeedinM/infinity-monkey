@@ -18,7 +18,7 @@ export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
             const data = await response.json();
             console.log(data);
             if (response.ok) {
-                const words = data.foundWord.map(item => item.word);
+                const words = data.foundWord.map(item => [item.word]);
                 setListaDePalavras(words);
             } else {
                 alert(data.error);
