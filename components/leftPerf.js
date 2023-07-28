@@ -1,5 +1,5 @@
 import { signOut } from 'next-auth/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './leftPerf.module.css';
 
@@ -29,6 +29,10 @@ export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
         }
     }
 
+    useEffect(() => {
+        listaPalavras();
+    }, [userEmail]);
+
     return (
         <div className={styles.perfContainer}>
             <div className={styles.imgPerfil}>
@@ -43,7 +47,7 @@ export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
                 <p>pontos:</p>
             </div>
 
-            <div onClick={() => listaPalavras()} className={styles.divPalavras}>
+            <div onClick={listaPalavras} className={styles.divPalavras}>
                 <p>Palavras encontradas</p>
                 <div>{listaDePalavras.join(', ')}</div>
             </div>
