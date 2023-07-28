@@ -43,9 +43,9 @@ export default function OJogo() {
 
             const data = await response.json();
             if (response.ok) {
-            setPalavras((prevPalavras) => [...prevPalavras, selectedText]);
+                alert('Palavra encontrada e adicionada com sucesso.');
             } else {
-            alert(data.error);
+                alert(data.error);
             }
         } else {
             alert('Palavra não encontrada no dicionário.');
@@ -94,11 +94,6 @@ export default function OJogo() {
             <div className={styles.divTxt} onMouseUp={handleSelection}>
             {textoMacaco.map((letra, index) => (
                 <span key={index}>{letra}</span>
-            ))}
-            </div>
-            <div>
-            {palavras.map((palavra, index) => (
-                <p key={index}>{index} {palavra}</p>
             ))}
             </div>
         </div> 
