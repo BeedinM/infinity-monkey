@@ -47,9 +47,10 @@ export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
                 <p>pontos:</p>
             </div>
 
-            <div onClick={listaPalavras} className={styles.divPalavras}>
+            <div className={styles.divPalavras}>
                 <p>Palavras encontradas</p>
                 <div>{listaDePalavras.join(', ')}</div>
+                <button onClick={listaPalavras}>Atualizar</button>
             </div>
 
             <button onClick={() => signOut()}>
