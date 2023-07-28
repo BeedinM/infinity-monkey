@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         }
     
         try {
-          const foundWord = await prisma.foundWord.findFirst({
+          const foundWord = await prisma.foundWord.findMany({
             where: {
               userId: user.id,
             },

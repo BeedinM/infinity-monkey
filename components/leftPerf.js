@@ -18,7 +18,6 @@ export default function LeftPerf({ nomeUser, imgUser, userEmail}) {
             const data = await response.json();
             console.log(data);
             if (response.ok) {
-                // Assuming "data.foundWord" is an array of objects with the property "word"
                 const words = data.foundWord.map(item => item.word);
                 setListaDePalavras(words);
             } else {
